@@ -28,12 +28,9 @@ from OpenSSL import crypto
 
 from easy_crypto import *
 
-DEFAULT_CA = "https://acme-staging.api.letsencrypt.org"
-CA = DEFAULT_CA
 
 CA = "https://acme-v02.api.letsencrypt.org"
 
-#CA = "https://acme-staging-v02.api.letsencrypt.org"
 
 RANDOMIZATION_FACTOR = 60;
 MAX_VALIDATION_POLL_COUNT = 20;
