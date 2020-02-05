@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
+import string
 
 from OpenSSL import crypto
 
@@ -11,7 +12,8 @@ def get_csr_domains_from_pem(csr_pem):
     for i in csr.get_extensions():
         if i.get_short_name() == 'subjectAltName':
             for j in i.get_data().split('\x82')[1:]:
-                domains.append(j[1:])
+                if all(ch in string.printable for ch in j[1:]): #hotfix for some unknown characters I haven't got around into yet
+                    domains.append(j[1:])
     return domains;
 
 
