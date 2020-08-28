@@ -330,8 +330,6 @@ class v2(object):
         code, headers, result = self.__signedRequestKID(finalize_url, payload)
         result = json.loads(result);
         if result['status'] == 'valid':
-            #return requests.get(result['certificate'], timeout=self.__t).content;
-            return (True,requests.get(result['certificate'], timeout=self.__t).content);
             supposedCert = requests.get(result['certificate'], timeout=self.__t).content;
             try: #hotfix for json'd errors
                 errorMsg = json.loads(supposedCert);
