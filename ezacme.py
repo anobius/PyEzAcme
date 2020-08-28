@@ -332,6 +332,12 @@ class v2(object):
         if result['status'] == 'valid':
             #return requests.get(result['certificate'], timeout=self.__t).content;
             return (True,requests.get(result['certificate'], timeout=self.__t).content);
+            supposedCert = requests.get(result['certificate'], timeout=self.__t).content;
+            try: #hotfix for json'd errors
+                errorMsg = json.loads(supposedCert);
+                return (False,"%s %s" % (errorMsg['type'], errorMsg['detail']));
+            except:
+                return (True,supposedCert);
         else:
             print "Finalization response: %s" % result;
             return (False,result["detail"]);
